@@ -5,7 +5,7 @@
 from turtle import *
 import math
 
-print("ax^2 + bx + c\n\njust click enter if there is not one\n\n\n")
+print("ax^2 + bx + c\n\njust click enter if there is not one\nthe parabola might not be seen if the axis of symetry is too much far away to origin.\nif value contains letters, it will be considered as 0\n\n")
 
 def turtleSettings():
 
@@ -31,10 +31,6 @@ def Quad():
 
     #values of the parabola.
     a = input("a = ")
-    b = input("b = ")
-    c = input("c = ")
-
-    #the code does not work proper if there is a value between 1 and -1 for the variable a. 
     while type(a) is str:
         try:
             a = float(a)
@@ -42,7 +38,22 @@ def Quad():
         except ValueError:
             print("-a- is not valid.")
             a = input("enter a new value for a: ")
-            print("value is not valid")
+
+    b = input("b = ")
+    try:
+        b = float(b)
+    except ValueError:
+        b = 0
+    try:
+        c = input("c = ")
+    except ValueError:
+        c = 0
+    
+    aos = (-b/(2*a))
+    axisOfSymetry = ("axis of symetry is x = " + str(aos) + "\n")
+
+    #to check there is no text in the values.. 
+
 
     #to open the turtle window.
     turtleSettings()
@@ -52,7 +63,7 @@ def Quad():
 
         #root, axis of symetry and y-intercept.
         print("\n\nthe root and y-intercept for this parabola is 0")
-        print("axis of symetry is x = " + (-b/(2*a)) + "\n")
+        print(axisOfSymetry)
 
         #setting the position of the pen to the starting point.
         penup()
@@ -81,7 +92,8 @@ def Quad():
             print("\n\nthere is no roots for this parabola")
         yintercept = c
         print("\ny-intercept is " + str(c) + "\n")   
-        print("axis of symetry is x = " + (-b/(2*a)) + "\n")
+        print(axisOfSymetry)
+
 
         #setting the position of the pen to the starting point.
         penup()
@@ -109,24 +121,31 @@ def Quad():
             print("\n\nthere is no roots for this parabola")    
         yintercept = c
         print("\ny-intercept is " + str(c) + "\n")   
-        print("axis of symetry is x = " + (-b/(2*a)) + "\n")
+        print(axisOfSymetry)
 
         #setting the position of the pen to the starting point.
         penup()
-        setpos(((-b/(2*a))+xmin), (a*((-b/(2*a))+xmin)**2)+b*((-b/(2*a))+xmin))
+        setpos((aos+xmin), (a*((aos)+xmin)**2)+b*((aos)+xmin))
         pendown()
         pensize(2)
         color("red")
         #setting the position of the pen to the starting point.
-        for y in range((round(-b/(2*a)) + xmin), (round((-b/(2*a))) + xmax)):
+        for y in range((round(aos) + xmin), (round((aos)) + xmax)):
             ysqr = (y*y)
             setpos(y, (a*ysqr)+(b*y))
         done()
 
     #for a parabola with a formula like -ax^2+bx+c-
     else:
-        b = float(b)
-        c = float(c)
+        try:
+            b = float(b)
+        except ValueError:
+            b = 0
+
+        try:
+            c = float(c)
+        except ValueError:
+            c = 0
 
         #to find roots, axis of symetry and y-intercept.
         if b**2-4*a*c >= 0:
@@ -137,17 +156,17 @@ def Quad():
             print("\n\nthere is no roots for this parabola")  
         yintercept = str(c)
         print("\ny intercept is " + yintercept + "\n")
-        print("axis of symetry is x = " + (-b/(2*a)) + "\n")
+        print(axisOfSymetry)
 
         #setting the position of the pen to the starting point.
         penup()
-        setpos(((-b/(2*a))+xmin), ((a*((-b/(2*a))+xmin)**2)+b*((-b/(2*a))+xmin)+c))
+        setpos(((aos)+xmin), ((a*((aos)+xmin)**2)+b*((aos)+xmin)+c))
         pendown()
         pensize(2)
         color("red")
 
         #setting the position of the pen to the starting point.
-        for y in range((round(-b/(2*a)) + xmin), (round((-b/(2*a))) + xmax)):
+        for y in range((round(aos) + xmin), (round(aos) + xmax)):
             ysqr = (y*y)
             setpos(y, ((a*ysqr)+(b*y)+c))
         done()       
